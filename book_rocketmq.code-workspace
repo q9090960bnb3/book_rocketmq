@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "root",
+			"path": "."
+		},
+		{
+			"path": "a-rocketmq-demo"
+		}
+	],
+	"settings": {
+		"markdown.copyFiles.destination": {
+			"**/*": "imgs/"
+		},
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.test.config":{
+			"console": "internalConsole"
+		}
+	}
+}
