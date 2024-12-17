@@ -15,7 +15,10 @@
 		"java.compile.nullAnalysis.mode": "automatic",
 		"java.configuration.updateBuildConfiguration": "automatic",
 		"java.test.config":{
-			"console": "internalConsole"
-		}
+			// "console": "internalConsole"
+			"console": "integratedTerminal"
+		},
+		// "java.debug.settings.console": "integratedConsole"
+		"java.debug.settings.console": "integratedTerminal"
 	}
 }

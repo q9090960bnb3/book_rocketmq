@@ -1,5 +1,7 @@
 package com.q9090960bnb3.demo;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -14,58 +16,48 @@ import org.junit.Test;
 
 import com.q9090960bnb3.constant.MqConstant;
 
-public class ASimpleTest {
+public class EBatchTest {
     @Test
-    public void simpleProducer() throws Exception{
+    public void simpleBatchProducer() throws Exception {
         // 创建一个生产者
-        DefaultMQProducer producer = new DefaultMQProducer("test-producer-group");
+        DefaultMQProducer producer = new DefaultMQProducer("batch-producer-group");
         // 连接nameserver
         producer.setNamesrvAddr(MqConstant.NAME_SRV_ADDR);
         // 启动
         producer.start();
         // 创建消息
-        Message message = new Message("testTopic", "我是一个简单的消息".getBytes());
+        List<Message> msgs = Arrays.asList(
+            new Message("batchTopic", "我是一组消息的A消息".getBytes()),
+            new Message("batchTopic", "我是一组消息的B消息".getBytes()),
+            new Message("batchTopic", "我是一组消息的C消息".getBytes())
+        );
         // 发送消息
-        SendResult sendResult = producer.send(message);
+        SendResult sendResult = producer.send(msgs);
         System.out.println(sendResult.getSendStatus());
         // 关闭生产者
         producer.shutdown();
     }
 
-    ///////////////// 消费者
     @Test
-    public void simpleConsumer() throws Exception{
-        // 创建一个消费者
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("test-consumer-group");
-        // 设置nameserver地址
+    public void simpleBatchConsumer() throws Exception {
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("batch-consumer-group");
         consumer.setNamesrvAddr(MqConstant.NAME_SRV_ADDR);
-        // 订阅一个主题 *标识订阅这个主题所有消息
-        consumer.subscribe("testTopic", "*");
-        // 创建一个监听器 （一直监听，异步回调方式）
-        consumer.registerMessageListener(new MessageListenerConcurrently(){
+        consumer.subscribe("batchTopic", "*");
+        consumer.registerMessageListener(new MessageListenerConcurrently() {
+
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                // 消费消息
-                System.out.println("我是消费者");
+                System.out.println("收到消息了:" + new Date()+ " 消息个数:" + msgs.size());
                 for (MessageExt msg : msgs) {
                     System.out.println(msg.toString());
                     System.out.println("消息内容:" + new String(msg.getBody()));
                 }
                 System.out.println("消费上下文:" + context);
-                // 返回值
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
-        });
-        // 启动
-        consumer.start();
-        // 挂起jvm
-        System.in.read();
-        // Thread.sleep(1000L);
-    }
 
-    @Test
-    public void helloWorld() throws Exception{
-        System.out.println("hello world45");
-        // throw new Exception("error");
+        });
+        consumer.start();
+        System.in.read();
     }
 }
