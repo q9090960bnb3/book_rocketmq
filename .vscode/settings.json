@@ -2,5 +2,7 @@
   "markdown.copyFiles.destination": {
     // 将复制的图片放入根目录下的imgs文件夹中
     "**/*": "imgs/"
-  }
+  },
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
