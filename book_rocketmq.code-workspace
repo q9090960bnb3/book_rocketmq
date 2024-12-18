@@ -6,6 +6,12 @@
 		},
 		{
 			"path": "a-rocketmq-demo"
+		},
+		{
+			"path": "b-rocketmq-boot-p"
+		},
+		{
+			"path": "c-rocketmq-boot-c"
 		}
 	],
 	"settings": {
