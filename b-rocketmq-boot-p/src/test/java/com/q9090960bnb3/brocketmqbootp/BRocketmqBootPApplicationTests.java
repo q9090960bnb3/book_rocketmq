@@ -69,4 +69,11 @@ class BRocketmqBootPApplicationTests {
         rocketMQTemplate.syncSend("bootKeyTopic", message);
     }
 
+    ///////// 测试消费模式  集群模式 广播模式
+    @Test
+    void modeTest() throws Exception{
+        for (int i=0; i< 10; i++) {
+            rocketMQTemplate.syncSend("modeTopic", "我是第" + i + "个消息");
+        }
+    }
 }
