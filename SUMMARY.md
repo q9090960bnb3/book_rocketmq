@@ -8,3 +8,5 @@
 * [rocketmq消息中的key](doc/mq_key.md)
 * [重复消息解决方案](doc/mq_repeat_msg.md)
 * [rocketmq重试机制](doc/mq_retry.md)
+* [rocketmq消费模式](doc/mq_consumer_mode.md)
+* [rocketmq常见问题](doc/mq_used_questions.md)

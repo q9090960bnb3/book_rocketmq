@@ -76,4 +76,25 @@ class BRocketmqBootPApplicationTests {
             rocketMQTemplate.syncSend("modeTopic", "我是第" + i + "个消息");
         }
     }
+
+    // 积压问题
+    @Test
+    void jyTest() throws Exception{
+        for (int i=0; i< 1000; i++) {
+            rocketMQTemplate.syncSend("jyTopic", "我是第" + i + "个消息");
+        }
+    }
+
+    // 重置点位
+    @Test
+    void jumpTest() throws Exception{
+        rocketMQTemplate.syncSend("jumpTopic", "boot-consumer-group");
+    }
+
+    // 轨迹消息
+    @Test
+    void traceTest() throws Exception{
+        rocketMQTemplate.syncSend("traceTopic", "我是trace消息");
+    }
+    
 }
