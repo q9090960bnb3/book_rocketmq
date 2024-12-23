@@ -3,4 +3,3 @@ rocketmq:
   producer:
     group: boot-producer-group
     enable-msg-trace: true # 开启发送方消息轨迹
-

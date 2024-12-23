@@ -10,3 +10,4 @@
 * [rocketmq重试机制](doc/mq_retry.md)
 * [rocketmq消费模式](doc/mq_consumer_mode.md)
 * [rocketmq常见问题](doc/mq_used_questions.md)
+* [rocketmq安全配置](doc/mq_security.md)
