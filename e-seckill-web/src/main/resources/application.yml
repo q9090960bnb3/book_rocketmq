@@ -1,0 +1,16 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8081
+  tomcat:
+    threads:
+      max: 400
+spring:
+  redis:
+    host: localhost
+    port: 55509
+    database: 0
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    access-key: rocketmq2
+    secret-key: 12345678

@@ -1,0 +1,21 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/seckill?useSSL=false&serverTimezone=Asia/Shanghai
+  redis:
+    host: localhost
+    port: 55509
+    database: 0
+rocketmq:
+  name-server: 127.0.0.1:9876
+  consumer:
+    access-key: rocketmq2
+    secret-key: 12345678
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

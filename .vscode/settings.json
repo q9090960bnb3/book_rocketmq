@@ -4,5 +4,16 @@
     "**/*": "imgs/"
   },
   "java.compile.nullAnalysis.mode": "automatic",
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "mybatis-tools.connections.mysql": [
+    {
+      "url": "jdbc:mysql://localhost:55506/seckill?useSSL=false&serverTimezone=Asia/Shanghai",
+      "tag": "myali",
+      "host": "localhost",
+      "port": "55506",
+      "database": "seckill",
+      "user": "root",
+      "password": "123456"
+    }
+  ]
 }
