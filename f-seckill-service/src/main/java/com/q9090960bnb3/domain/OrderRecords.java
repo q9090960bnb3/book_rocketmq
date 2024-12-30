@@ -1,7 +1,6 @@
 package com.q9090960bnb3.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,22 +11,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Goods implements Serializable {
+public class OrderRecords implements Serializable {
     private Integer id;
 
-    private String goodsName;
+    private Integer userId;
 
-    private BigDecimal price;
+    private String orderSn;
 
-    private Integer stocks;
-
-    private Integer status;
-
-    private String pic;
+    private Integer goodsId;
 
     private Date createTime;
-
-    private Date updateTime;
 
     private static final long serialVersionUID = 1L;
 }

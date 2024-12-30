@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="f-seckill-service-0.0.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/f-seckill-service/target/f-seckill-service-0.0.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

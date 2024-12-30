@@ -1,13 +1,8 @@
-package com.q9090960bnb3.mapper;
+package com.q9090960bnb3.service;
 
 import com.q9090960bnb3.domain.Goods;
+public interface GoodsService{
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-
-@Mapper
-public interface GoodsMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(Goods record);
@@ -20,5 +15,4 @@ public interface GoodsMapper {
 
     int updateByPrimaryKey(Goods record);
 
-    List<Goods> selectSeckillGoods();
 }
