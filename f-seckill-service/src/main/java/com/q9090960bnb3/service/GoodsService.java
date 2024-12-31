@@ -15,4 +15,11 @@ public interface GoodsService{
 
     int updateByPrimaryKey(Goods record);
 
+    /**
+     * 真正处理秒杀业务
+     * @param userId
+     * @param goodsId
+     */
+    void realSeckill(Integer userId, Integer goodsId);
+
 }

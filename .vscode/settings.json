@@ -15,5 +15,21 @@
       "user": "root",
       "password": "123456"
     }
+  ],
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 55506,
+      "driver": "MySQL",
+      "name": "book_rocketmq",
+      "group": "book",
+      "username": "root",
+      "database": "seckill"
+    }
   ]
 }
