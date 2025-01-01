@@ -5,16 +5,19 @@ import org.apache.rocketmq.spring.annotation.ConsumeMode;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.q9090960bnb3.service.GoodsService;
 
 @Component
 @RocketMQMessageListener(topic = "seckillTopic", consumerGroup = "seckill-consumer-group", consumeMode = ConsumeMode.CONCURRENTLY, consumeThreadNumber = 40)
-public class SeckillListener implements RocketMQListener<MessageExt>{
+public class SeckillListener implements RocketMQListener<MessageExt> {
 
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      * 扣减库存
@@ -25,20 +28,44 @@ public class SeckillListener implements RocketMQListener<MessageExt>{
      */
     // @Override
     // public void onMessage(MessageExt message) {
-    //     String msg = new String(message.getBody());
-    //     Integer userId = Integer.parseInt(msg.split("-")[0]);
-    //     Integer goodsId = Integer.parseInt(msg.split("-")[1]);
+    // String msg = new String(message.getBody());
+    // Integer userId = Integer.parseInt(msg.split("-")[0]);
+    // Integer goodsId = Integer.parseInt(msg.split("-")[1]);
 
-    //     // 这样可以解决并发问题，先锁再mysql 事务
-    //     synchronized(this) {
-    //         goodsService.realSeckill(userId, goodsId);
-    //     }
-        
-    //     // goodsService.realSeckill(userId, goodsId);
+    // // 这样可以解决并发问题，先锁再mysql 事务
+    // synchronized(this) {
+    // goodsService.realSeckill(userId, goodsId);
+    // }
+
+    // // goodsService.realSeckill(userId, goodsId);
     // }
 
     /**
-     * 方案2 分布式锁，mysql（行锁） redis
+     * 方案2 分布式锁，mysql（行锁）
+     */
+    @Override
+    public void onMessage(MessageExt message) {
+        String msg = new String(message.getBody());
+        Integer userId = Integer.parseInt(msg.split("-")[0]);
+        Integer goodsId = Integer.parseInt(msg.split("-")[1]);
+
+        boolean flag = redisTemplate.opsForValue().setIfAbsent("lock:" + goodsId, "");
+        if (flag) {
+            goodsService.realSeckill(userId, goodsId);
+        }else{
+            
+        }
+
+        // 这样可以解决并发问题，先锁再mysql 事务
+        synchronized (this) {
+            goodsService.realSeckill(userId, goodsId);
+        }
+
+        // goodsService.realSeckill(userId, goodsId);
+    }
+
+    /**
+     * 方案3 分布式锁， redis
      */
     @Override
     public void onMessage(MessageExt message) {
@@ -47,10 +74,10 @@ public class SeckillListener implements RocketMQListener<MessageExt>{
         Integer goodsId = Integer.parseInt(msg.split("-")[1]);
 
         // 这样可以解决并发问题，先锁再mysql 事务
-        synchronized(this) {
+        synchronized (this) {
             goodsService.realSeckill(userId, goodsId);
         }
-        
+
         // goodsService.realSeckill(userId, goodsId);
     }
 

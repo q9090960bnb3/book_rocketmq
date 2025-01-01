@@ -133,6 +133,6 @@
   </select>
 
     <update id="updateStock">
-    update goods set stocks = stocks - 1, update_time = now() where id = #{value}
+    update goods set stocks = stocks - 1, update_time = now() where id = #{value} and stocks >= 1
     </update>
 </mapper>
