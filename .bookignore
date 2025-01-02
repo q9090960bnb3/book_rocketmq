@@ -1,0 +1,12 @@
+/.idea
+/.vscode
+/.gitignore
+/.bookignore
+/makefile
+/a-rocketmq-demo
+/b-rocketmq-boot-p
+/c-rocketmq-boot-c
+/a-rocketmq-demo
+/d-tomcat-qps-test
+/e-seckill-web
+/f-seckill-service
